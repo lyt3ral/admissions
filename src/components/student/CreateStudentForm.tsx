@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { api } from "@/trpc/react";
 
 import {
@@ -37,7 +37,7 @@ export default function CreateStudentForm({
   const studentForm = useForm<z.infer<typeof StudentFormSchema>>({
     resolver: zodResolver(StudentFormSchema),
     defaultValues: {
-      registerNumber: 21031232123,
+      registerNumber: "21031232123",
       firstName: "Rish",
       lastName: "Bassi",
       phone: "1234567890",
@@ -46,11 +46,23 @@ export default function CreateStudentForm({
       address: "Chennai, India",
       dob: new Date(),
       bloodGroup: "O+",
-    }
+    },
   });
 
-  function onStudentFormSubmit(data: z.infer<typeof StudentFormSchema>) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const createStudent = api.student.create.useMutation();
+
+  async function onStudentFormSubmit(data: z.infer<typeof StudentFormSchema>) {
     console.log(data);
+    setIsLoading(true);
+    const res = await createStudent.mutateAsync(data);
+    setIsLoading(false);
+    if (res) {
+      toast.success("Student created");
+    } else {
+      toast.error("Error adding student");
+    }
   }
 
   return (
@@ -222,7 +234,9 @@ export default function CreateStudentForm({
                 )}
               />
 
-              <Button type="submit">Create Student</Button>
+              <Button type="submit" disabled={isLoading}>
+                Create Student
+              </Button>
             </div>
           </div>
         </form>

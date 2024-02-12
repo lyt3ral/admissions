@@ -47,6 +47,9 @@ dependencies:
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
+  lucide:
+    specifier: ^0.325.0
+    version: 0.325.0
   lucide-react:
     specifier: ^0.325.0
     version: 0.325.0(react@18.2.0)
@@ -2638,6 +2641,10 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /lucide@0.325.0:
+    resolution: {integrity: sha512-R8yEsXA2i4cjS5j8icg3OinM37ALbz6HgEzNcS5DtyuTDmSyeb1bY/U5UxkCel5lBQJ6iNtTa0tSiYAnGLrMnw==}
     dev: false
 
   /merge2@1.4.1:

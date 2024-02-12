@@ -1,7 +1,7 @@
 import {z} from "zod"
 
 export const StudentFormSchema = z.object({
-  registerNumber: z.coerce.number(),
+  registerNumber: z.string(),
   firstName: z.string(),
   lastName: z.string(),
   phone: z.string(),

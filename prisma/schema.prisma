@@ -61,7 +61,7 @@ model VerificationToken {
 
 model Student {
   id             Int        @unique @default(autoincrement())
-  registerNumber Int        @unique
+  registerNumber String     @unique
   firstName      String
   lastName       String
   phone          String
